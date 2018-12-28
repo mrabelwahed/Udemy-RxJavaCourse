@@ -7,15 +7,15 @@ import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class RepoRepository (val repoRemoteSource: RepoRemoteSource, val repoLocalSource:RepoLocalSource) :RepoDataSource {
-    override fun fetchRepos(username: String): Flowable<List<Repo>> {
-       return  Flowable.concat(
-                repoLocalSource.fetchRepos(username),
-                repoRemoteSource.fetchRepos(username)
-                        .doOnNext{ repos -> saveRepos(repos)}
-                        .onErrorResumeNext(Flowable.empty())
-       )
+class RepoRepository(val repoRemoteSource: RepoRemoteSource, val repoLocalSource: RepoLocalSource) : RepoDataSource {
+    override fun fetchRepos(username: String): Observable<List<Repo>> {
 
+        return Observable.concat(repoLocalSource.fetchRepos(username),
+                repoRemoteSource.fetchRepos(username)
+                        .doOnNext { it -> saveRepos(it) }
+                        .onErrorResumeNext(Observable.empty())
+
+        )
 
     }
 

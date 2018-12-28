@@ -5,6 +5,6 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 
 interface RepoDataSource {
-    fun fetchRepos(username:String) : Flowable<List<Repo>>
+    fun fetchRepos(username:String) : Observable<List<Repo>>
     fun saveRepos(repos :List<Repo>)
 }

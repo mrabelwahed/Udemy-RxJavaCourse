@@ -17,21 +17,14 @@ import io.reactivex.schedulers.Schedulers
 class RepoViewModel : ViewModel() {
     val compositeDisposable = CompositeDisposable()
     val repoLiveData = MutableLiveData<List<Repo>>()
-    val repository = RepoRepository(RepoRemoteSource,RepoLocalSource)
+    val repository = RepoRepository(RepoRemoteSource , RepoLocalSource)
 
 
     fun getMyStarsRepos(username:String){
        val reposDisposable = repository.fetchRepos(username)
-//               .doOnError {  throwable -> Flowable.empty<Throwable>()
-//                   Log.e("error", throwable.message)
-//                   Flowable.empty<Throwable>()
-//                   repoLiveData.value = mutableListOf()
-//               }
                .subscribeOn(Schedulers.io())
                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( {it-> repoLiveData.value = it}
-                        , {throwable -> println(throwable.message)})
-
+                .subscribe{it-> repoLiveData.value = it}
 
 
         compositeDisposable.add(reposDisposable)

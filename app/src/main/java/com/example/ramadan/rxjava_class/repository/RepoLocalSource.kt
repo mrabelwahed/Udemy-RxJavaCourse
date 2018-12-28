@@ -11,20 +11,16 @@ import io.reactivex.schedulers.Schedulers
 
 object RepoLocalSource :RepoDataSource{
 
-    override fun fetchRepos(username: String): Flowable<List<Repo>> {
+    override fun fetchRepos(username: String): Observable<List<Repo>> {
 
-        return  Flowable.fromCallable {
-            AppDatabase.getInstance(RxApp.inst)?.getRepoDao()!!.fetchAllMyStarsRepos()
+        return Observable.fromCallable {
+            AppDatabase.getInstance(RxApp.INSTANCE)?.getRepoDao()!!.fetchAllMyStarsRepos()
         }
 
     }
 
     override fun saveRepos(repos: List<Repo>) {
-        AppDatabase.getInstance(RxApp.inst)?.getRepoDao()!!.saveAllMyStarsRepos(repos)
-//        Flowable.just( AppDatabase.getInstance(RxApp.inst))
-//                .subscribeOn(Schedulers.io())
-//                .subscribe { db-> db.getRepoDao().saveAllMyStarsRepos(repos) }
-
+        AppDatabase.getInstance(RxApp.INSTANCE)?.getRepoDao()!!.saveAllMyStarsRepos(repos)
     }
 
 }

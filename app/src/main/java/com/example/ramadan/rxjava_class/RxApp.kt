@@ -8,23 +8,15 @@ import com.example.ramadan.rxjava_class.db.RepoDAO
 
 class RxApp :Application() {
     companion object {
-        lateinit var  inst :RxApp
-        fun getInstance():RxApp{
-            return inst
-        }
+        lateinit var  INSTANCE:RxApp
     }
-
-    lateinit var db:AppDatabase
 
     override fun onCreate() {
         super.onCreate()
-        inst = this
-      // db = Room.databaseBuilder(applicationContext,AppDatabase::class.java,"repo-db").build()
+        INSTANCE = this
     }
 
-//    fun getDB():AppDatabase{
-//        return db
-//    }
+
 
 
 }

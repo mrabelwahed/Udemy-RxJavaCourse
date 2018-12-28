@@ -8,5 +8,5 @@ import retrofit2.http.Path
 
 interface GithubService {
     @GET("users/{user}/starred")
-    fun getStarredRepos(@Path("user") username:String): Flowable<List<Repo>>
+    fun getStarredRepos(@Path("user") username:String): Observable<List<Repo>>
 }
