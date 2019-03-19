@@ -36,6 +36,7 @@ class GithubRepoAdapter  : RecyclerView.Adapter<GithubRepoAdapter.StarRepoViewHo
 
 
     public fun addRepos(repos:ArrayList<Repo>){
+        data.clear()
         data.addAll(repos)
         notifyDataSetChanged()
     }

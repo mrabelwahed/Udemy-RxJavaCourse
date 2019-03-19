@@ -21,6 +21,9 @@ class RepoViewModel : ViewModel() {
 
 
     fun getMyStarsRepos(username:String){
+        if (repoLiveData.value !=null){
+            return
+        }
        val reposDisposable = repository.fetchRepos(username)
                .subscribeOn(Schedulers.io())
                .observeOn(AndroidSchedulers.mainThread())
